@@ -2,7 +2,7 @@
 #include <string>  // Provides string
 #include "othello.h"
 #include "game.h"     // Provides definition of game class
-#include "Piece.h"     // Provides definition of piece class
+#include "space.h"     // Provides definition of piece class
 using namespace std;
 
 namespace main_savitch_14

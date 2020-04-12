@@ -1,18 +1,19 @@
-#ifndef PIECE_H
-#define PIECE_H
+#ifndef SPACE_H
+#define SPACE_H
 #include <queue>   // Provides queue<string>
 #include <string>  // Provides string
 
 // namespace main_savitch_14{
 
-class Piece{
+class Space{
     public:
-        Piece(){
+        Space(){
             black = false;
             white = false;
+            empty - true;
         }
 
-        Piece(char color){
+        Space(char color){
             color = tolower(color);
             if (color == 'b'){
                 black = true;
@@ -28,14 +29,17 @@ class Piece{
             if (black){
                 return true;
             }
-            return false;
         }
 
         bool is_white(){
             if (white){
                 return true;
             }
-            return false;
+        }
+        bool is_empty(){
+            if (empty){
+                return true;
+            }
         }
 
         void flip(){
@@ -43,7 +47,7 @@ class Piece{
                 black = false;
                 white = true;
             }
-            else {
+            else if (white){
                 black = true;
                 white = false;
             }
@@ -51,7 +55,8 @@ class Piece{
 
     private:
         bool black;
-        bool white; 
+        bool white;
+        bool empty;
 };
 
 

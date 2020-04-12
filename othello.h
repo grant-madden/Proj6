@@ -3,7 +3,7 @@
 #include <queue>   // Provides queue<string>
 #include <string>  // Provides string
 #include "game.h"     // Provides definition of game class
-#include "Piece.h"     // Provides definition of piece class
+#include "space.h"     // Provides definition of piece class
 using namespace std;
 
 namespace main_savitch_14
@@ -23,7 +23,7 @@ class Othello :public game{
         bool is_game_over()const;
         bool is_legal(const std::string& move)const;
     private:
-        Piece board[8][8];
+        Space board[8][8];
         int move_number;
 };
 
