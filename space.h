@@ -21,21 +21,24 @@ class Space{
             return;
         }
 
-        bool is_black(){
+        bool is_black()const{
             if (black){
                 return true;
             }
+            return false;
         }
 
-        bool is_white(){
+        bool is_white()const{
             if (white){
                 return true;
             }
+            return false;
         }
-        bool is_empty(){
+        bool is_empty()const{
             if (empty){
                 return true;
             }
+            return false;
         }
 
         void set_black(){

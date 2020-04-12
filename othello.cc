@@ -37,7 +37,7 @@ namespace main_savitch_14
 
         // Header, Numbers, and third line
         cout << BOLD << B_BLACK << "                ";
-        cout << BOLD << B_BLACK << BLUE << "OTHELLO";
+        cout << BOLD << B_BLACK << GREEN << "OTHELLO";
         cout << BOLD << B_BLACK << "                ";
         cout << RESET << endl;
         cout << BOLD << B_BLACK << "   ";
@@ -47,13 +47,27 @@ namespace main_savitch_14
         cout << "    " << RESET << endl;
         print_filler();
 
-        // Rest if thea board
+        // Prints the board
         for(int i = 0; i < 8; i++){
             cout << BOLD << B_BLACK;
             cout << " " << LETTERS[i] << " ";
             
-            cout << BOLD << B_BLUE << WHITE;
-            cout << "|   |   |   |   |   |   |   |   |";
+            cout << BLACK;
+            for(int j = 0; j < 8; j++){
+                if (board[i][j].is_empty()){
+                    cout << B_GREEN  << "|   ";
+                }
+                else if (board[i][j].is_black()){
+                    cout << B_GREEN <<  "|";
+                    cout << B_BLACK  << " B ";
+                }
+                else {
+                    cout << B_GREEN <<  "|";
+                    cout << B_WHITE  << " W ";
+                }
+            }
+            cout << "|";
+            
             cout << BOLD << B_BLACK << "   ";
             cout << RESET << endl;
             print_filler();
@@ -75,13 +89,8 @@ namespace main_savitch_14
 
     void print_filler(){
     cout << BOLD << B_BLACK << "   ";
-    cout << BOLD << B_BLUE << WHITE << "---------------------------------";
+    cout << BOLD << B_GREEN << BLACK << "---------------------------------";
     cout << BOLD << B_BLACK << "   " << RESET;
     cout << endl;
-
-    // cout << BOLD << B_BLACK << "    ";
-    // cout << BOLD << B_BLUE << BLACK << "                                                          ";
-    // cout << BOLD << B_BLACK << "    " << RESET;
-    // cout << endl;
     }
 }
