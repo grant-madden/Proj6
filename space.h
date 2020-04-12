@@ -7,22 +7,18 @@
 
 class Space{
     public:
-        Space(){
-            black = false;
-            white = false;
-            empty - true;
-        }
-
-        Space(char color){
+        Space(char color = 'e'){
             color = tolower(color);
             if (color == 'b'){
-                black = true;
-                white = false;
+                set_black();
             }
             if (color == 'w'){
-                black = false;
-                white = true;
+                set_white();
             }
+            if (color == 'e'){
+                set_empty();
+            }
+            return;
         }
 
         bool is_black(){
@@ -42,14 +38,28 @@ class Space{
             }
         }
 
+        void set_black(){
+            black = true;
+            white = false;
+            empty = false;
+        }
+
+        void set_white(){
+            black = false;
+            white = true;
+            empty = false;
+        }
+        void set_empty(){
+            black = false;
+            white = false;
+            empty = true;
+        }
         void flip(){
             if (black){
-                black = false;
-                white = true;
+                set_white();
             }
             else if (white){
-                black = true;
-                white = false;
+                set_black();
             }
         }
 
