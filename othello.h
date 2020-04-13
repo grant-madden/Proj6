@@ -14,6 +14,8 @@ namespace main_savitch_14
 class Othello :public game{
     public:
         Othello(){
+            cout << "Choose a color (w for white, b for black): ";
+            cin >> userColor;
             restart();
         }
         void make_move(const std::string& move);
@@ -28,6 +30,8 @@ class Othello :public game{
     private:
         Space board[8][8];
         int move_number;
+        char userColor;
+        char compColor; 
 };
 
 void print_filler();
