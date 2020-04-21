@@ -14,8 +14,8 @@ namespace main_savitch_14
 class Othello :public game{
     public:
         Othello(){
-            cout << "Choose a color (w for white, b for black): ";
-            cin >> userColor;
+            userColor = 'b';
+            cin.clear();
             restart();
         }
         void make_move(const std::string& move);
@@ -24,6 +24,8 @@ class Othello :public game{
         void compute_moves(std::queue<std::string>& moves)const;
         
         void display_status()const;
+        void black_flip(const std::string& move);
+        void white_flip(const std::string& move);
         int evaluate()const;
         bool is_game_over()const;
         bool is_legal(const std::string& move)const;
