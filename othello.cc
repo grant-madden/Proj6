@@ -12,10 +12,13 @@ namespace main_savitch_14
             if (userColor == 'b'){
                 board[row][column].set_black();
                 black_flip(move);
+                userColor = 'w';
             }
             else {
                 board[row][column].set_white();
                 white_flip(move);
+                userColor = 'b';
+
             }
         }
     }
@@ -71,7 +74,55 @@ namespace main_savitch_14
             }
     }
     void Othello::white_flip(const std::string& move){
+        int row = int(toupper(move[0]) - 'A');
+        int column = int(move[1] - '1');
 
+        // Check right horizontal
+            if (board[row][column + 1].is_black()){
+                for (int i = column + 1; i < 8; i++){
+                    if (board[row][i].is_white()){
+                        for (int j = column + 1; j < 8; j++){
+                             if (board[row][j].is_black())
+                                board[row][j].flip();
+                        }
+                    }
+                }
+            }
+            // Check left horizontal
+            if (board[row][column - 1].is_black()){
+                for (int i = column - 1; i >= 0; i--){
+                    if (board[row][i].is_white()){
+                        for (int j = column - 1; j >= 0; j--){
+                             if (board[row][j].is_black())
+                                board[row][j].flip();
+                        }
+                    }
+                }
+            }
+            // Check above
+            if (board[row - 1][column].is_black()){
+                for (int i = row - 1; i >= 0; i--){
+                    if (board[i][column].is_white()){
+                        for (int j = row - 1; j >= 0; j--){
+                            if (board[j][column].is_black()){
+                                board[j][column].flip();
+                            }
+                        }
+                    }
+                }
+            }
+            // Check below
+            if (board[row + 1][column].is_black()){
+                for (int i = row + 1; i < 8; i++){
+                    if (board[i][column].is_white()){
+                        for (int j = row + 1; j < 8; j++){
+                            if (board[j][column].is_black()){
+                                board[j][column].flip();
+                            }
+                        }
+                    }
+                }
+            }
     }
     void Othello::restart(){
         for(int i = 0; i < 8; i++){
@@ -195,25 +246,104 @@ namespace main_savitch_14
             
 
              // Check Top Right Diagonal
-
+            if (board[row - 1][column + 1].is_white()){
+                for (int i = 1; row - i >= 0 && column + i < 8; i++){
+                    if (board[row - i][column + i].is_black()){
+                        return true;
+                    }
+                }
+            }
              // Check Top Left Diagonal
+             if (board[row - 1][column - 1].is_white()){
+                for (int i = 1; row - i >= 0 && column - i >= 0; i++){
+                    if (board[row - i][column - i].is_black()){
+                        return true;
+                    }
+                }
+            }
              // Check Bottom Right Diagonal
+             if (board[row + 1][column + 1].is_white()){
+                for (int i = 1; row + i < 8 && column + i < 8; i++){
+                    if (board[row + i][column + i].is_black()){
+                        return true;
+                    }
+                }
+            }
              // Check Bottom Left Diagonal
+             if (board[row + 1][column - 1].is_white()){
+                for (int i = 1; row + i < 8 && column - i >= 0; i++){
+                    if (board[row + i][column - i].is_black()){
+                        return true;
+                    }
+                }
+            }
+            
             return false;
             
         }
         else if (userColor == 'w'){
-            if (row == 2 && column == 4){
-            return true;
+            if (board[row][column + 1].is_black()){
+                for (int i = column + 1; i < 8; i++){
+                    if (board[row][i].is_white()){
+                        return true;
+                    }
+                }
             }
-            else if (row == 3 && column == 5){
-                return true;
+            // Check left horizontal
+            if (board[row][column - 1].is_black()){
+                for (int i = column - 1; i >= 0; i--){
+                    if (board[row][i].is_white()){
+                        return true;
+                    }
+                }
             }
-            else if (row == 4 && column == 2){
-                return true;
+            // Check above
+            if (board[row - 1][column].is_black()){
+                for (int i = row - 1; i >= 0; i--){
+                    if (board[i][column].is_white()){
+                        return true;
+                    }
+                }
             }
-            else if (row == 5 && column == 3){
-                return true;
+            // Check below
+            if (board[row + 1][column].is_black()){
+                for (int i = row + 1; i < 8; i++){
+                    if (board[i][column].is_white()){
+                        return true;
+                    }
+                }
+            }
+             // Check Top Right Diagonal
+            if (board[row - 1][column + 1].is_black()){
+                for (int i = 1; row - i >= 0 && column + i < 8; i++){
+                    if (board[row - i][column + i].is_white()){
+                        return true;
+                    }
+                }
+            }
+             // Check Top Left Diagonal
+             if (board[row - 1][column - 1].is_black()){
+                for (int i = 1; row - i >= 0 && column - i >= 0; i++){
+                    if (board[row - i][column - i].is_white()){
+                        return true;
+                    }
+                }
+            }
+             // Check Bottom Right Diagonal
+             if (board[row + 1][column + 1].is_black()){
+                for (int i = 1; row + i < 8 && column + i < 8; i++){
+                    if (board[row + i][column + i].is_white()){
+                        return true;
+                    }
+                }
+            }
+             // Check Bottom Left Diagonal
+             if (board[row + 1][column - 1].is_black()){
+                for (int i = 1; row + i < 8 && column - i >= 0; i++){
+                    if (board[row + i][column - i].is_white()){
+                        return true;
+                    }
+                }
             }
         }
         return false;

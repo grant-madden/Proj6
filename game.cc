@@ -25,16 +25,18 @@ namespace main_savitch_14
 	restart( );
 // Note that as you develop the game you will be gradually un-commenting 
 // this function.	
-	//while (!is_game_over( )) // un-comment this
-	//{
+	while (!is_game_over( )) // un-comment this
+	{
 	    display_status( );
-	//    if (last_mover( ) == COMPUTER)
+//	    if (last_mover( ) == COMPUTER)
 		make_human_move( );
-	//    else
-	//	make_computer_move( );
-	//}
+//	    else
+//		make_computer_move( );
+	}
 	display_status( );
-	return HUMAN;
+	return winning();// although the winning function is listed as 
+			// an optional override, you should write your 
+		        // own. It simply counts pieces.
     }
 
 
