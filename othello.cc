@@ -3,7 +3,7 @@
 namespace main_savitch_14
 {
     void Othello::make_move(const std::string& move){
-        
+        string answer;
         if (is_legal(move)){
             
             int row = int(toupper(move[0]) - 'A');
@@ -72,6 +72,54 @@ namespace main_savitch_14
                     }
                 }
             }
+             // Check Top Right Diagonal
+            if (board[row - 1][column + 1].is_white()){
+                for (int i = 1; row - i >= 0 && column + i < 8; i++){
+                    if (board[row - i][column + i].is_black()){
+                        for (int j = 1; row - j >= 0 && column + j < 8; j++){
+                            if (board[row - j][column + j].is_white()){
+                                board[row - j][column + j].flip();
+                            }
+                        }
+                    }
+                }
+            }
+             // Check Top Left Diagonal
+             if (board[row - 1][column - 1].is_white()){
+                for (int i = 1; row - i >= 0 && column - i >= 0; i++){
+                    if (board[row - i][column - i].is_black()){
+                        for (int j = 1; row - j >= 0 && column - j >= 0; j++){
+                            if (board[row - j][column - j].is_white()){
+                                board[row - j][column - j].flip();
+                            }
+                        }
+                    }
+                }
+            }
+             // Check Bottom Right Diagonal
+             if (board[row + 1][column + 1].is_white()){
+                for (int i = 1; row + i < 8 && column + i < 8; i++){
+                    if (board[row + i][column + i].is_black()){
+                        for (int j = 1; row + j < 8 && column + j < 8; j++){
+                            if (board[row + j][column + j].is_white()){
+                                board[row + j][column + j].flip();
+                            }
+                        }
+                    }
+                }
+            }
+             // Check Bottom Left Diagonal
+             if (board[row + 1][column - 1].is_white()){
+                for (int i = 1; row + i < 8 && column - i >= 0; i++){
+                    if (board[row + i][column - i].is_black()){
+                        for (int j = 1; row + j < 8 && column - j >= 0; j++){
+                            if (board[row + j][column - j].is_white()){
+                                board[row + j][column - j].flip();
+                            }
+                        }
+                    }
+                }
+            }
     }
     void Othello::white_flip(const std::string& move){
         int row = int(toupper(move[0]) - 'A');
@@ -118,6 +166,54 @@ namespace main_savitch_14
                         for (int j = row + 1; j < 8; j++){
                             if (board[j][column].is_black()){
                                 board[j][column].flip();
+                            }
+                        }
+                    }
+                }
+            }
+             // Check Top Right Diagonal
+            if (board[row - 1][column + 1].is_black()){
+                for (int i = 1; row - i >= 0 && column + i < 8; i++){
+                    if (board[row - i][column + i].is_white()){
+                        for (int j = 1; row - j >= 0 && column + j < 8; j++){
+                            if (board[row - j][column + j].is_black()){
+                                board[row - j][column + j].flip();
+                            }
+                        }
+                    }
+                }
+            }
+             // Check Top Left Diagonal
+             if (board[row - 1][column - 1].is_black()){
+                for (int i = 1; row - i >= 0 && column - i >= 0; i++){
+                    if (board[row - i][column - i].is_white()){
+                        for (int j = 1; row - j >= 0 && column - j >= 0; j++){
+                            if (board[row - j][column - j].is_black()){
+                                board[row - j][column - j].flip();
+                            }
+                        }
+                    }
+                }
+            }
+             // Check Bottom Right Diagonal
+             if (board[row + 1][column + 1].is_black()){
+                for (int i = 1; row + i < 8 && column + i < 8; i++){
+                    if (board[row + i][column + i].is_white()){
+                        for (int j = 1; row + j < 8 && column + j < 8; j++){
+                            if (board[row + j][column + j].is_black()){
+                                board[row + j][column + j].flip();
+                            }
+                        }
+                    }
+                }
+            }
+             // Check Bottom Left Diagonal
+             if (board[row + 1][column - 1].is_black()){
+                for (int i = 1; row + i < 8 && column - i >= 0; i++){
+                    if (board[row + i][column - i].is_white()){
+                        for (int j = 1; row + j < 8 && column - j >= 0; j++){
+                            if (board[row + j][column - j].is_black()){
+                                board[row + j][column - j].flip();
                             }
                         }
                     }
@@ -170,7 +266,7 @@ namespace main_savitch_14
 
         // Prints the board
         for(int i = 0; i < 8; i++){
-            cout << BOLD << B_BLACK;
+            cout << BOLD << B_BLACK << WHITE;
             cout << " " << LETTERS[i] << " ";
             
             cout << BLACK;
@@ -196,6 +292,11 @@ namespace main_savitch_14
         }
         cout << BOLD << B_BLACK << "                                       " << RESET << endl;
         cout << endl;
+        
+        if (userColor == 'b')
+            cout << "Player 1 (Black) - It's your turn!" << endl;
+        else 
+            cout << "Player 2 (White) - It's your turn!" << endl;
     }
     int Othello::evaluate()const{
         return 0;
@@ -204,11 +305,14 @@ namespace main_savitch_14
         return NULL;
     }
     bool Othello::is_legal(const std::string& move)const{
-
         int row = int(toupper(move[0]) - 'A');
         int column = int(move[1] - '1');
-                cout << "R: " << row << endl;
-                cout << "C: " << column << endl;
+
+        if (row < 0 || row >= 8 || column < 0 || column >= 8)
+            return false;
+        
+        if (!board[row][column].is_empty())
+            return false;
 
         if (userColor == 'b'){
             // Check right horizontal
@@ -346,7 +450,8 @@ namespace main_savitch_14
                 }
             }
         }
-        return false;
+        
+        return false;   
     }
 
     void print_filler(){
