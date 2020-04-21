@@ -30,7 +30,7 @@ namespace main_savitch_14
             if (board[row][column + 1].is_white()){
                 for (int i = column + 1; i < 8; i++){
                     if (board[row][i].is_black()){
-                        for (int j = column + 1; j < 8; j++){
+                        for (int j = column + 1; j < i; j++){
                              if (board[row][j].is_white())
                                 board[row][j].flip();
                         }
@@ -64,7 +64,7 @@ namespace main_savitch_14
             if (board[row + 1][column].is_white()){
                 for (int i = row + 1; i < 8; i++){
                     if (board[i][column].is_black()){
-                        for (int j = row + 1; j < 8; j++){
+                        for (int j = row + 1; j < i; j++){
                             if (board[j][column].is_white()){
                                 board[j][column].flip();
                             }
@@ -76,7 +76,7 @@ namespace main_savitch_14
             if (board[row - 1][column + 1].is_white()){
                 for (int i = 1; row - i >= 0 && column + i < 8; i++){
                     if (board[row - i][column + i].is_black()){
-                        for (int j = 1; row - j >= 0 && column + j < 8; j++){
+                        for (int j = 0; row - j > row - i && column + j < column + i; j++){
                             if (board[row - j][column + j].is_white()){
                                 board[row - j][column + j].flip();
                             }
@@ -88,7 +88,7 @@ namespace main_savitch_14
              if (board[row - 1][column - 1].is_white()){
                 for (int i = 1; row - i >= 0 && column - i >= 0; i++){
                     if (board[row - i][column - i].is_black()){
-                        for (int j = 1; row - j >= 0 && column - j >= 0; j++){
+                        for (int j = 0; row - j > row - i && column - j > column - i; j++){
                             if (board[row - j][column - j].is_white()){
                                 board[row - j][column - j].flip();
                             }
@@ -100,7 +100,7 @@ namespace main_savitch_14
              if (board[row + 1][column + 1].is_white()){
                 for (int i = 1; row + i < 8 && column + i < 8; i++){
                     if (board[row + i][column + i].is_black()){
-                        for (int j = 1; row + j < 8 && column + j < 8; j++){
+                        for (int j = 0; row + j < row + i && column + j < column + i; j++){
                             if (board[row + j][column + j].is_white()){
                                 board[row + j][column + j].flip();
                             }
@@ -112,7 +112,7 @@ namespace main_savitch_14
              if (board[row + 1][column - 1].is_white()){
                 for (int i = 1; row + i < 8 && column - i >= 0; i++){
                     if (board[row + i][column - i].is_black()){
-                        for (int j = 1; row + j < 8 && column - j >= 0; j++){
+                        for (int j = 0; row + j < row + i && column - j > column - i; j++){
                             if (board[row + j][column - j].is_white()){
                                 board[row + j][column - j].flip();
                             }
@@ -129,7 +129,7 @@ namespace main_savitch_14
             if (board[row][column + 1].is_black()){
                 for (int i = column + 1; i < 8; i++){
                     if (board[row][i].is_white()){
-                        for (int j = column + 1; j < 8; j++){
+                        for (int j = column + 1; j < i; j++){
                              if (board[row][j].is_black())
                                 board[row][j].flip();
                         }
@@ -163,7 +163,7 @@ namespace main_savitch_14
             if (board[row + 1][column].is_black()){
                 for (int i = row + 1; i < 8; i++){
                     if (board[i][column].is_white()){
-                        for (int j = row + 1; j < 8; j++){
+                        for (int j = row + 1; j < i; j++){
                             if (board[j][column].is_black()){
                                 board[j][column].flip();
                             }
@@ -175,7 +175,7 @@ namespace main_savitch_14
             if (board[row - 1][column + 1].is_black()){
                 for (int i = 1; row - i >= 0 && column + i < 8; i++){
                     if (board[row - i][column + i].is_white()){
-                        for (int j = 1; row - j >= 0 && column + j < 8; j++){
+                        for (int j = 0; row - j > row - i && column + j < column + i; j++){
                             if (board[row - j][column + j].is_black()){
                                 board[row - j][column + j].flip();
                             }
@@ -187,7 +187,7 @@ namespace main_savitch_14
              if (board[row - 1][column - 1].is_black()){
                 for (int i = 1; row - i >= 0 && column - i >= 0; i++){
                     if (board[row - i][column - i].is_white()){
-                        for (int j = 1; row - j >= 0 && column - j >= 0; j++){
+                        for (int j = 0; row - j > row - i && column - j > column - i; j++){
                             if (board[row - j][column - j].is_black()){
                                 board[row - j][column - j].flip();
                             }
@@ -199,7 +199,13 @@ namespace main_savitch_14
              if (board[row + 1][column + 1].is_black()){
                 for (int i = 1; row + i < 8 && column + i < 8; i++){
                     if (board[row + i][column + i].is_white()){
-                        for (int j = 1; row + j < 8 && column + j < 8; j++){
+                        cout << "row + i: " << row + i << endl;
+                        cout << "row: " << row << endl;
+                        
+                        for (int j = 0; (row + j < row + i) && column + j < column + i; j++){
+                        cout << "row + j: " << row + j << endl;
+                        cout << "row + i: " << row + i << endl;
+
                             if (board[row + j][column + j].is_black()){
                                 board[row + j][column + j].flip();
                             }
@@ -211,7 +217,7 @@ namespace main_savitch_14
              if (board[row + 1][column - 1].is_black()){
                 for (int i = 1; row + i < 8 && column - i >= 0; i++){
                     if (board[row + i][column - i].is_white()){
-                        for (int j = 1; row + j < 8 && column - j >= 0; j++){
+                        for (int j = 0; row + j < row + i && column - j > column - i; j++){
                             if (board[row + j][column - j].is_black()){
                                 board[row + j][column - j].flip();
                             }
