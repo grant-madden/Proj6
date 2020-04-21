@@ -34,6 +34,7 @@ namespace main_savitch_14
                              if (board[row][j].is_white())
                                 board[row][j].flip();
                         }
+                        i = 8;
                     }
                 }
             }
@@ -41,10 +42,11 @@ namespace main_savitch_14
             if (board[row][column - 1].is_white()){
                 for (int i = column - 1; i >= 0; i--){
                     if (board[row][i].is_black()){
-                        for (int j = column - 1; j >= 0; j--){
+                        for (int j = column - 1; j > i; j--){
                              if (board[row][j].is_white())
                                 board[row][j].flip();
                         }
+                        i = -1;
                     }
                 }
             }
@@ -52,11 +54,12 @@ namespace main_savitch_14
             if (board[row - 1][column].is_white()){
                 for (int i = row - 1; i >= 0; i--){
                     if (board[i][column].is_black()){
-                        for (int j = row - 1; j >= 0; j--){
+                        for (int j = row - 1; j > i; j--){
                             if (board[j][column].is_white()){
                                 board[j][column].flip();
                             }
                         }
+                        i = -1;
                     }
                 }
             }
@@ -69,6 +72,7 @@ namespace main_savitch_14
                                 board[j][column].flip();
                             }
                         }
+                        i = 8;
                     }
                 }
             }
@@ -81,6 +85,7 @@ namespace main_savitch_14
                                 board[row - j][column + j].flip();
                             }
                         }
+                        i = 8;
                     }
                 }
             }
@@ -93,6 +98,7 @@ namespace main_savitch_14
                                 board[row - j][column - j].flip();
                             }
                         }
+                        i = 1000;
                     }
                 }
             }
@@ -105,6 +111,7 @@ namespace main_savitch_14
                                 board[row + j][column + j].flip();
                             }
                         }
+                        i = 8;
                     }
                 }
             }
@@ -117,6 +124,7 @@ namespace main_savitch_14
                                 board[row + j][column - j].flip();
                             }
                         }
+                        i = 8;
                     }
                 }
             }
@@ -133,6 +141,7 @@ namespace main_savitch_14
                              if (board[row][j].is_black())
                                 board[row][j].flip();
                         }
+                        i = 8;
                     }
                 }
             }
@@ -140,10 +149,11 @@ namespace main_savitch_14
             if (board[row][column - 1].is_black()){
                 for (int i = column - 1; i >= 0; i--){
                     if (board[row][i].is_white()){
-                        for (int j = column - 1; j >= 0; j--){
+                        for (int j = column - 1; j > i; j--){
                              if (board[row][j].is_black())
                                 board[row][j].flip();
                         }
+                        i = -1;
                     }
                 }
             }
@@ -151,11 +161,12 @@ namespace main_savitch_14
             if (board[row - 1][column].is_black()){
                 for (int i = row - 1; i >= 0; i--){
                     if (board[i][column].is_white()){
-                        for (int j = row - 1; j >= 0; j--){
+                        for (int j = row - 1; j > i; j--){
                             if (board[j][column].is_black()){
                                 board[j][column].flip();
                             }
                         }
+                        i = -1;
                     }
                 }
             }
@@ -168,6 +179,7 @@ namespace main_savitch_14
                                 board[j][column].flip();
                             }
                         }
+                        i = 8;
                     }
                 }
             }
@@ -180,6 +192,7 @@ namespace main_savitch_14
                                 board[row - j][column + j].flip();
                             }
                         }
+                        i = 8;
                     }
                 }
             }
@@ -192,6 +205,7 @@ namespace main_savitch_14
                                 board[row - j][column - j].flip();
                             }
                         }
+                        i = 1000;
                     }
                 }
             }
@@ -210,6 +224,7 @@ namespace main_savitch_14
                                 board[row + j][column + j].flip();
                             }
                         }
+                        i = 8;
                     }
                 }
             }
@@ -222,6 +237,7 @@ namespace main_savitch_14
                                 board[row + j][column - j].flip();
                             }
                         }
+                        i = 8;
                     }
                 }
             }
@@ -291,11 +307,18 @@ namespace main_savitch_14
             }
             cout << "|";
             
-            cout << BOLD << B_BLACK << "   ";
+            cout << BOLD << B_BLACK << WHITE << " " << LETTERS[i] << " ";
             cout << RESET << endl;
             print_filler();
 
         }
+
+        cout << BOLD << B_BLACK << "   ";
+        for(int i = 0; i < 8; i++){
+            cout << "  " << NUMBERS[i] << " ";
+        }
+        cout << "    " << RESET << endl;
+
         cout << BOLD << B_BLACK << "                                       " << RESET << endl;
         cout << endl;
         
@@ -324,6 +347,9 @@ namespace main_savitch_14
             // Check right horizontal
             if (board[row][column + 1].is_white()){
                 for (int i = column + 1; i < 8; i++){
+                    if (board[row][i].is_empty()){
+                        return false;
+                    }
                     if (board[row][i].is_black()){
                         return true;
                     }
@@ -332,6 +358,9 @@ namespace main_savitch_14
             // Check left horizontal
             if (board[row][column - 1].is_white()){
                 for (int i = column - 1; i >= 0; i--){
+                    if (board[row][i].is_empty()){
+                        return false;
+                    }
                     if (board[row][i].is_black()){
                         return true;
                     }
@@ -340,6 +369,9 @@ namespace main_savitch_14
             // Check above
             if (board[row - 1][column].is_white()){
                 for (int i = row - 1; i >= 0; i--){
+                    if (board[i][column].is_empty()){
+                        return false;
+                    }
                     if (board[i][column].is_black()){
                         return true;
                     }
@@ -348,6 +380,9 @@ namespace main_savitch_14
             // Check below
             if (board[row + 1][column].is_white()){
                 for (int i = row + 1; i < 8; i++){
+                    if (board[i][column].is_empty()){
+                        return false;
+                    }
                     if (board[i][column].is_black()){
                         return true;
                     }
@@ -358,6 +393,9 @@ namespace main_savitch_14
              // Check Top Right Diagonal
             if (board[row - 1][column + 1].is_white()){
                 for (int i = 1; row - i >= 0 && column + i < 8; i++){
+                    if (board[row - i][column + i].is_empty()){
+                        return false;
+                    }
                     if (board[row - i][column + i].is_black()){
                         return true;
                     }
@@ -366,6 +404,9 @@ namespace main_savitch_14
              // Check Top Left Diagonal
              if (board[row - 1][column - 1].is_white()){
                 for (int i = 1; row - i >= 0 && column - i >= 0; i++){
+                    if (board[row - i][column - i].is_empty()){
+                        return false;
+                    }
                     if (board[row - i][column - i].is_black()){
                         return true;
                     }
@@ -374,6 +415,9 @@ namespace main_savitch_14
              // Check Bottom Right Diagonal
              if (board[row + 1][column + 1].is_white()){
                 for (int i = 1; row + i < 8 && column + i < 8; i++){
+                    if (board[row + i][column + i].is_empty()){
+                        return false;
+                    }
                     if (board[row + i][column + i].is_black()){
                         return true;
                     }
@@ -382,6 +426,9 @@ namespace main_savitch_14
              // Check Bottom Left Diagonal
              if (board[row + 1][column - 1].is_white()){
                 for (int i = 1; row + i < 8 && column - i >= 0; i++){
+                    if (board[row + i][column - i].is_empty()){
+                        return false;
+                    }
                     if (board[row + i][column - i].is_black()){
                         return true;
                     }
@@ -394,6 +441,9 @@ namespace main_savitch_14
         else if (userColor == 'w'){
             if (board[row][column + 1].is_black()){
                 for (int i = column + 1; i < 8; i++){
+                    if (board[row][i].is_empty()){
+                        return false;
+                    }
                     if (board[row][i].is_white()){
                         return true;
                     }
@@ -402,6 +452,9 @@ namespace main_savitch_14
             // Check left horizontal
             if (board[row][column - 1].is_black()){
                 for (int i = column - 1; i >= 0; i--){
+                    if (board[row][i].is_empty()){
+                        return false;
+                    }
                     if (board[row][i].is_white()){
                         return true;
                     }
@@ -410,6 +463,9 @@ namespace main_savitch_14
             // Check above
             if (board[row - 1][column].is_black()){
                 for (int i = row - 1; i >= 0; i--){
+                    if (board[i][column].is_empty()){
+                        return false;
+                    }
                     if (board[i][column].is_white()){
                         return true;
                     }
@@ -418,6 +474,9 @@ namespace main_savitch_14
             // Check below
             if (board[row + 1][column].is_black()){
                 for (int i = row + 1; i < 8; i++){
+                    if (board[i][column].is_empty()){
+                        return false;
+                    }
                     if (board[i][column].is_white()){
                         return true;
                     }
@@ -426,6 +485,9 @@ namespace main_savitch_14
              // Check Top Right Diagonal
             if (board[row - 1][column + 1].is_black()){
                 for (int i = 1; row - i >= 0 && column + i < 8; i++){
+                    if (board[row - i][column + i].is_empty()){
+                        return false;
+                    }
                     if (board[row - i][column + i].is_white()){
                         return true;
                     }
@@ -434,6 +496,9 @@ namespace main_savitch_14
              // Check Top Left Diagonal
              if (board[row - 1][column - 1].is_black()){
                 for (int i = 1; row - i >= 0 && column - i >= 0; i++){
+                    if (board[row - i][column - i].is_empty()){
+                        return false;
+                    }
                     if (board[row - i][column - i].is_white()){
                         return true;
                     }
@@ -442,6 +507,9 @@ namespace main_savitch_14
              // Check Bottom Right Diagonal
              if (board[row + 1][column + 1].is_black()){
                 for (int i = 1; row + i < 8 && column + i < 8; i++){
+                    if (board[row + i][column + i].is_empty()){
+                        return false;
+                    }
                     if (board[row + i][column + i].is_white()){
                         return true;
                     }
@@ -450,6 +518,9 @@ namespace main_savitch_14
              // Check Bottom Left Diagonal
              if (board[row + 1][column - 1].is_black()){
                 for (int i = 1; row + i < 8 && column - i >= 0; i++){
+                    if (board[row + i][column - i].is_empty()){
+                        return false;
+                    }
                     if (board[row + i][column - i].is_white()){
                         return true;
                     }
