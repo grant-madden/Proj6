@@ -23,6 +23,52 @@ namespace main_savitch_14
         int row = int(toupper(move[0]) - 'A');
         int column = int(move[1] - '1');
 
+        // Check right horizontal
+            if (board[row][column + 1].is_white()){
+                for (int i = column + 1; i < 8; i++){
+                    if (board[row][i].is_black()){
+                        for (int j = column + 1; j < 8; j++){
+                             if (board[row][j].is_white())
+                                board[row][j].flip();
+                        }
+                    }
+                }
+            }
+            // Check left horizontal
+            if (board[row][column - 1].is_white()){
+                for (int i = column - 1; i >= 0; i--){
+                    if (board[row][i].is_black()){
+                        for (int j = column - 1; j >= 0; j--){
+                             if (board[row][j].is_white())
+                                board[row][j].flip();
+                        }
+                    }
+                }
+            }
+            // Check above
+            if (board[row - 1][column].is_white()){
+                for (int i = row - 1; i >= 0; i--){
+                    if (board[i][column].is_black()){
+                        for (int j = row - 1; j >= 0; j--){
+                            if (board[j][column].is_white()){
+                                board[j][column].flip();
+                            }
+                        }
+                    }
+                }
+            }
+            // Check below
+            if (board[row + 1][column].is_white()){
+                for (int i = row + 1; i < 8; i++){
+                    if (board[i][column].is_black()){
+                        for (int j = row + 1; j < 8; j++){
+                            if (board[j][column].is_white()){
+                                board[j][column].flip();
+                            }
+                        }
+                    }
+                }
+            }
     }
     void Othello::white_flip(const std::string& move){
 
@@ -116,7 +162,6 @@ namespace main_savitch_14
         if (userColor == 'b'){
             // Check right horizontal
             if (board[row][column + 1].is_white()){
-                cout << "RHorizontal" << endl;
                 for (int i = column + 1; i < 8; i++){
                     if (board[row][i].is_black()){
                         return true;
@@ -124,7 +169,6 @@ namespace main_savitch_14
                 }
             }
             // Check left horizontal
-                cout << "LHorizontal" << endl;
             if (board[row][column - 1].is_white()){
                 for (int i = column - 1; i >= 0; i--){
                     if (board[row][i].is_black()){
@@ -134,7 +178,6 @@ namespace main_savitch_14
             }
             // Check above
             if (board[row - 1][column].is_white()){
-                cout << "Above" << endl;
                 for (int i = row - 1; i >= 0; i--){
                     if (board[i][column].is_black()){
                         return true;
